@@ -46,7 +46,7 @@ int main (int argc,char *argv[]){
 
             globalError += (localError * localError);
 
-            printf("Geracao %d : RMSE = %.4f\n", geracoes, sqrt(globalError/pContador));
+            printf("Geracao %d : Media do Erro = %.4f\n", geracoes, sqrt(globalError/pContador));
         }
     } while(globalError !=0 && geracoes<=MAXGERACOES);
 
