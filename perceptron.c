@@ -20,7 +20,7 @@ int main (int argc,char *argv[]){
         exit(1);
     }
     i=0;
-    while(fscanf(conjuntoDeTreinamento, "%d %d", &entrada[i], &saidaDesejada[i]) != EOF){
+    while(fscanf(conjuntoDeTreinamento, "%f %f", &entrada[i], &saidaDesejada[i]) != EOF){
        i++; 
     }
 
