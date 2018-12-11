@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define TAXAAPRENDIZAGEM 0.001
-#define MAXGERACOES 10000
+#define TAXAAPRENDIZAGEM 0.0000000000000001
+#define MAXEPOCAS 1000000
 
 int calculoSaida(float pesos[],float entrada){
     float sum = entrada * pesos[1] + pesos[0];
@@ -12,7 +12,7 @@ int calculoSaida(float pesos[],float entrada){
 
 int main (int argc,char *argv[]){
     float entrada[21], pesos[2],globalError, localError;
-    int i, geracoes, pContador, p, saidaDesejada[21], saida;
+    int i, epocas, pContador, p, saidaDesejada[21], saida;
 
     FILE *conjuntoDeTreinamento;
     if((conjuntoDeTreinamento = fopen("conjuntodetreinamento.txt", "r"))== NULL){
@@ -29,10 +29,10 @@ int main (int argc,char *argv[]){
     pesos[0] = 1;
     pesos[1] = 1;
 
-    geracoes = 0;
+    epocas = 0;
 
     do{
-        geracoes++;
+        epocas++;
         globalError = 0;
         for(p=0; p < pContador; p++){
             saida = calculoSaida(pesos, entrada[p]);
@@ -42,11 +42,9 @@ int main (int argc,char *argv[]){
             pesos[0] += TAXAAPRENDIZAGEM * localError;
 
             globalError += (localError * localError);
-
-            //printf("Geracao %d : Media do Erro = %.4f\n", geracoes, sqrt(globalError/pContador));
         }
-    } while(globalError !=0 && geracoes<=MAXGERACOES);
+    } while(globalError !=0 && epocas<=MAXEPOCAS);
 
-    printf("\nPesos Finais: %.2f*b + %.2f*x \n", pesos[0], pesos[1]);
+    printf("\nPesos Finais: %f*b + %f*x \n", pesos[0], pesos[1]);
     return 0;
-}//verificar se tem que normalizar
+}
